@@ -1,5 +1,10 @@
 # Monaco YAML
 
+## Dependencies
+
+Monaco Yaml - `https://github.com/pengx17/monaco-yaml`
+Language server - `https://github.com/wings-software/language-server/packages`
+
 ## Development
 
 - `git clone https://github.com/vardanbansal-harness/monaco-yaml.git`
