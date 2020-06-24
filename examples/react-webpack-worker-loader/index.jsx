@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import MonacoEditor from 'react-monaco-editor';
 // THIS WORKS
-// import 'monaco-yaml/esm/monaco.contribution';
-// import YamlWorker from 'worker-loader!monaco-yaml/esm/yaml.worker';
+import 'monaco-yaml/esm/monaco.contribution';
+import YamlWorker from 'worker-loader!monaco-yaml/esm/yaml.worker';
 
 // THIS DOESN'T
-import '@wings-software/language-server/esm/monaco.contribution';
-import YamlWorker from 'worker-loader!@wings-software/language-server/esm/yaml.worker';
+// import '@wings-software/language-server/esm/monaco.contribution';
+// import YamlWorker from 'worker-loader!@wings-software/language-server/esm/yaml.worker';
 
 import { languages } from 'monaco-editor/esm/vs/editor/editor.api';
 
