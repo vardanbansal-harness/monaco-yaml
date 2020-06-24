@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import MonacoEditor from 'react-monaco-editor';
+// THIS WORKS
 import 'monaco-yaml/esm/monaco.contribution';
+
 import { languages } from 'monaco-editor/esm/vs/editor/editor.api';
 
 // NOTE: This will give you all editor featues. If you would prefer to limit to only the editor

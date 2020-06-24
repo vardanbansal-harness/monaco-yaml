@@ -8,6 +8,8 @@
 
 Go to `react-webpack` or `react-webpack-worker-loader` under `examples/` and install dependencies by `npm install`
 
+Start webpack dev server `npm run start`
+
 ## Test in Browser
 
 - Open `http://localhost:8081/`
