@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import MonacoEditor from 'react-monaco-editor';
 // THIS WORKS
-import 'monaco-yaml/esm/monaco.contribution';
+// import 'monaco-yaml/esm/monaco.contribution';
+// import YamlWorker from 'worker-loader!monaco-yaml/esm/yaml.worker';
+
+// THIS DOESN'T
+import '@wings-software/language-server/esm/monaco.contribution';
+import YamlWorker from 'worker-loader!@wings-software/language-server/esm/yaml.worker';
 
 import { languages } from 'monaco-editor/esm/vs/editor/editor.api';
 
@@ -13,7 +18,6 @@ import 'monaco-editor';
 // NOTE: using loader syntax becuase Yaml worker imports editor.worker directly and that
 // import shouldn't go through loader syntax.
 import EditorWorker from 'worker-loader!monaco-editor/esm/vs/editor/editor.worker';
-import YamlWorker from 'worker-loader!monaco-yaml/esm/yaml.worker';
 
 window.MonacoEnvironment = {
   getWorker(workerId, label) {
@@ -27,7 +31,7 @@ window.MonacoEnvironment = {
 const { yaml } = languages || {};
 
 const Editor = () => {
-  const [value, setValue] = useState('p1: ');
+  const [value, setValue] = useState('');
   useEffect(() => {
     yaml &&
       yaml.yamlDefaults.setDiagnosticsOptions({
@@ -77,7 +81,6 @@ const Editor = () => {
                   title: 'The connector schema',
                   description:
                     'An explanation about the purpose of this instance.',
-                  default: {},
                   examples: [
                     {
                       identifier: 'awsQA',
