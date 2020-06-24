@@ -38,26 +38,212 @@ const Editor = () => {
             uri: 'http://myserver/foo-schema.json', // id of the first schema
             fileMatch: ['*'], // associate with our model
             schema: {
-              id: 'http://myserver/foo-schema.json', // id of the first schema
+              $schema: 'http://json-schema.org/draft-07/schema',
+              $id: 'http://example.com/example.json',
               type: 'object',
-              properties: {
-                p1: {
-                  enum: ['v1', 'v2'],
+              title: 'The root schema',
+              description:
+                'The root schema comprises the entire JSON document.',
+              default: {},
+              examples: [
+                {
+                  connector: {
+                    identifier: 'awsQA',
+                    name: 'AWS QA account',
+                    description: null,
+                    tags: [
+                      {
+                        businessUnit: 'ecommerce',
+                        aprroved: null,
+                      },
+                    ],
+                    scope: 'project',
+                    project: 'commerce-app',
+                    organization: 'commerce',
+                    type: 'gcp',
+                    spec:
+                      'service-account-key-file:"secretRefFile:gcp_service_account_file"',
+                  },
                 },
-                p2: {
-                  $ref: 'http://myserver/bar-schema.json', // reference the second schema
-                },
-              },
-            },
-          },
-          {
-            uri: 'http://myserver/bar-schema.json', // id of the first schema
-            schema: {
-              id: 'http://myserver/bar-schema.json', // id of the first schema
-              type: 'object',
+              ],
+              required: ['connector'],
+              additionalProperties: true,
               properties: {
-                q1: {
-                  enum: ['x1', 'x2'],
+                connector: {
+                  $id: '#/properties/connector',
+                  type: 'object',
+                  title: 'The connector schema',
+                  description:
+                    'An explanation about the purpose of this instance.',
+                  default: {},
+                  examples: [
+                    {
+                      identifier: 'awsQA',
+                      name: 'AWS QA account',
+                      description: null,
+                      tags: [
+                        {
+                          businessUnit: 'ecommerce',
+                          aprroved: null,
+                        },
+                      ],
+                      scope: 'project',
+                      project: 'commerce-app',
+                      organization: 'commerce',
+                      type: 'gcp',
+                      spec:
+                        'service-account-key-file:"secretRefFile:gcp_service_account_file"',
+                    },
+                  ],
+                  required: [
+                    'identifier',
+                    'name',
+                    'description',
+                    'tags',
+                    'scope',
+                    'project',
+                    'organization',
+                    'type',
+                    'spec',
+                  ],
+                  additionalProperties: true,
+                  properties: {
+                    identifier: {
+                      $id: '#/properties/connector/properties/identifier',
+                      type: 'string',
+                      title: 'The identifier schema',
+                      description:
+                        'An explanation about the purpose of this instance.',
+                      default: '',
+                      examples: ['awsQA'],
+                    },
+                    name: {
+                      $id: '#/properties/connector/properties/name',
+                      type: 'string',
+                      title: 'The name schema',
+                      description:
+                        'An explanation about the purpose of this instance.',
+                      default: '',
+                      examples: ['AWS QA account'],
+                    },
+                    description: {
+                      $id: '#/properties/connector/properties/description',
+                      type: 'null',
+                      title: 'The description schema',
+                      description:
+                        'An explanation about the purpose of this instance.',
+                      default: null,
+                      examples: [null],
+                    },
+                    tags: {
+                      $id: '#/properties/connector/properties/tags',
+                      type: 'array',
+                      title: 'The tags schema',
+                      description:
+                        'An explanation about the purpose of this instance.',
+                      default: [],
+                      examples: [
+                        [
+                          {
+                            businessUnit: 'ecommerce',
+                            aprroved: null,
+                          },
+                        ],
+                      ],
+                      additionalItems: true,
+                      items: {
+                        anyOf: [
+                          {
+                            $id:
+                              '#/properties/connector/properties/tags/items/anyOf/0',
+                            type: 'object',
+                            title: 'The first anyOf schema',
+                            description:
+                              'An explanation about the purpose of this instance.',
+                            default: {},
+                            examples: [
+                              {
+                                businessUnit: 'ecommerce',
+                                aprroved: null,
+                              },
+                            ],
+                            required: ['businessUnit', 'aprroved'],
+                            additionalProperties: true,
+                            properties: {
+                              businessUnit: {
+                                $id:
+                                  '#/properties/connector/properties/tags/items/anyOf/0/properties/businessUnit',
+                                type: 'string',
+                                title: 'The businessUnit schema',
+                                description:
+                                  'An explanation about the purpose of this instance.',
+                                default: '',
+                                examples: ['ecommerce'],
+                              },
+                              aprroved: {
+                                $id:
+                                  '#/properties/connector/properties/tags/items/anyOf/0/properties/aprroved',
+                                type: 'null',
+                                title: 'The aprroved schema',
+                                description:
+                                  'An explanation about the purpose of this instance.',
+                                default: null,
+                                examples: [null],
+                              },
+                            },
+                          },
+                        ],
+                        $id: '#/properties/connector/properties/tags/items',
+                      },
+                    },
+                    scope: {
+                      $id: '#/properties/connector/properties/scope',
+                      type: 'string',
+                      title: 'The scope schema',
+                      description:
+                        'An explanation about the purpose of this instance.',
+                      default: '',
+                      examples: ['project'],
+                    },
+                    project: {
+                      $id: '#/properties/connector/properties/project',
+                      type: 'string',
+                      title: 'The project schema',
+                      description:
+                        'An explanation about the purpose of this instance.',
+                      default: '',
+                      examples: ['commerce-app'],
+                    },
+                    organization: {
+                      $id: '#/properties/connector/properties/organization',
+                      type: 'string',
+                      title: 'The organization schema',
+                      description:
+                        'An explanation about the purpose of this instance.',
+                      default: '',
+                      examples: ['commerce'],
+                    },
+                    type: {
+                      $id: '#/properties/connector/properties/type',
+                      type: 'string',
+                      title: 'The type schema',
+                      description:
+                        'An explanation about the purpose of this instance.',
+                      default: '',
+                      examples: ['gcp'],
+                    },
+                    spec: {
+                      $id: '#/properties/connector/properties/spec',
+                      type: 'string',
+                      title: 'The spec schema',
+                      description:
+                        'An explanation about the purpose of this instance.',
+                      default: '',
+                      examples: [
+                        'service-account-key-file:"secretRefFile:gcp_service_account_file"',
+                      ],
+                    },
+                  },
                 },
               },
             },
